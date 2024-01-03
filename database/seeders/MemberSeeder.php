@@ -24,7 +24,8 @@ class MemberSeeder extends Seeder
                 'email' => 'Ramymed99@gmail.com',
                 'legalStatus' => 'Création Hors MBGA',
                 'startActivity' => Carbon::create ('09/05/2016'),
-                'creationProcedure' => 'N/A'
+                'creationProcedure' => 'N/A',
+                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
             ],
             [
                 'province' => 'AGADIR IDA-OUTANANE',
@@ -35,7 +36,8 @@ class MemberSeeder extends Seeder
                 'email' => 'contact@smart-mecanica.ma',
                 'legalStatus' => 'En cours',
                 'startActivity' => null,
-                'creationProcedure' => 'N/A'
+                'creationProcedure' => 'N/A',
+                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
             ],
             [
                 'province' => 'TIZNIT',
@@ -46,7 +48,8 @@ class MemberSeeder extends Seeder
                 'email' => 'juvenalgonepaul@gmail.com',
                 'legalStatus' => 'En cours',
                 'startActivity' => null,
-                'creationProcedure' => 'N/A'
+                'creationProcedure' => 'N/A',
+                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
             ],
             [
                 'province' => 'TIZNIT',
@@ -57,7 +60,8 @@ class MemberSeeder extends Seeder
                 'email' => 'abdessamadrahmouni@gmail.com',
                 'legalStatus' => 'Création Hors MBGA',
                 'startActivity' => Carbon::create('01/01/2021'),
-                'creationProcedure' => 'N/A'
+                'creationProcedure' => 'N/A',
+                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
             ],
         ]);
     }

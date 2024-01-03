@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('legalStatus');
             $table->dateTime('startActivity')->nullable();
             $table->string('creationProcedure');
+            $table->string('cin')->nullable();
+            $table->string('projectDescription')->nullable();
             $table->timestamps();
         });
     }
