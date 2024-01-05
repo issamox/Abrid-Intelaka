@@ -1,0 +1,9 @@
+fieldset, legend {
+    all: revert;
+}
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}

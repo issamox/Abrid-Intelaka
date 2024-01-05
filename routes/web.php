@@ -14,3 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\MemeberController::class,'index']);
+Route::get('/sendMail/{id}', [\App\Http\Controllers\MemeberController::class,'sendMail'])->name('candidate.mail');
+Route::get('candidate/tracking/{id}', [\App\Http\Controllers\MemeberController::class,'tracking'])->name('candidate.tracking');
+Route::post('candidate/upload/', [\App\Http\Controllers\MemeberController::class,'uploadFile'])->name('candidate.upload');
+
+Route::post('candidate/{member}', [\App\Http\Controllers\MemeberController::class,'update'])->name('candidate.update');

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('legal_files', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->string('carteAutoentrepreneur')->nullable();
             $table->string('statuts')->nullable();
             $table->string('projectStatus')->nullable();
@@ -39,7 +39,6 @@ return new class extends Migration
             $table->string('attestationAdministrative')->nullable();
             $table->string('domiciliationContract')->nullable();
 
-            $table->foreignId('member_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

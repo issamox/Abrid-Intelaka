@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
+            $table->string('cvs')->nullable();
+            $table->string('diplomas')->nullable();
+            $table->string('workCertificates')->nullable();
+            $table->string('declarations')->nullable();
             $table->timestamps();
-            $table->string('cvs');
-            $table->string('diplomas');
-            $table->string('workCertificates');
-            $table->string('declarations');
-
-            $table->foreignId('member_id')->constrained()->cascadeOnDelete();
 
         });
     }

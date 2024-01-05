@@ -30,6 +30,13 @@
                     <td>{{ $member->legalStatus }}</td>
                     <td>{{ $member->startActivity ? date('d/m/Y',strtotime($member->startActivity)) : '' }}</td>
                     <td>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a href="{{ route('candidate.mail', ['id' => $member->id ]) }}" title="send mail to candidate">
+                                <img src="{{ asset('icons/send-mail.svg') }}" alt="send mail" class="w-25">
+                            </a>
+                        </div>
+                    </td>
+                    <td>
 
                     </td>
                 </tr>
