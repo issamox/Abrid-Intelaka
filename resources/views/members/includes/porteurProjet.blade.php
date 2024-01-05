@@ -26,7 +26,7 @@
             <x-custom-upload label="cin" fileName="cin"  table="members" memberID="{{ $member->id }}" filePath="{{ $member->cin ?? '' }}"></x-custom-upload>
         </div>
         <div class="row">
-            <h3 class="text-bg-info my-4">Justificatifs d’expérience : </h3>
+{{--            <h3 class="text-bg-info my-4">Justificatifs d’expérience : </h3>--}}
             <div class="col-md-4">
                 <x-custom-upload label="Cv" fileName="cvs" table="experiences" memberID="{{ $member->id }}" filePath="{{ $member->experience->cvs ?? '' }}"></x-custom-upload>
             </div>
