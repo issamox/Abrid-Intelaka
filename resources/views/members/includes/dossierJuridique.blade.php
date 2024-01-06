@@ -1,5 +1,5 @@
 <fieldset class="scheduler-border mb-4">
-    <legend class="scheduler-border mb-3">2. Dossier Juridique</legend>
+    <legend class="scheduler-border mb-3">Dossier Juridique</legend>
     <div class="row">
         <div class="col-md-12">
             <div class="mb-3">

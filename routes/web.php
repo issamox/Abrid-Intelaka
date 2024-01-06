@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MemeberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\MemeberController::class,'index']);
-Route::get('/sendMail/{id}', [\App\Http\Controllers\MemeberController::class,'sendMail'])->name('candidate.mail');
-Route::get('candidate/tracking/{id}', [\App\Http\Controllers\MemeberController::class,'tracking'])->name('candidate.tracking');
-Route::post('candidate/upload/', [\App\Http\Controllers\MemeberController::class,'uploadFile'])->name('candidate.upload');
 
-Route::post('candidate/{member}', [\App\Http\Controllers\MemeberController::class,'update'])->name('candidate.update');
+Route::get('/', [MemeberController::class,'index'])->name('candidate.index')->middleware('auth');
+
+Route::group(['prefix' => 'candidate','as' => 'candidate.'],function (){
+    Route::get('/sendMail/{id}', [MemeberController::class,'sendMail'])->name('mail');
+    Route::post('/upload/', [MemeberController::class,'uploadFile'])->name('upload');
+
+    Route::get('/{member}/tracking', [MemeberController::class,'tracking'])->name('tracking');
+    Route::post('/{member}', [MemeberController::class,'update'])->name('update');
+
+    Route::get('/{member}/formation', [MemeberController::class,'formationForm'])->name('formationForm')->middleware('auth');
+    Route::get('/{member}/projectFilePdf', [MemeberController::class,'projectFilePdf'])->name('projectFilePdf')->middleware('auth');
+    Route::get('/{member}/candidateInfoPdf', [MemeberController::class,'candidateInfoPdf'])->name('candidateInfoPdf')->middleware('auth');
+    Route::get('/{member}/createZipFile', [MemeberController::class,'createZipFile'])->name('createZipFile')->middleware('auth');
+
+});
+
+
+require __DIR__.'/auth.php';

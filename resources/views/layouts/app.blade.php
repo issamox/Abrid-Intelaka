@@ -10,15 +10,16 @@
     <title>Document</title>
 </head>
 <body>
+@include('layouts.navigation')
 @yield('content')
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
 @if(session()->has('success'))
-<script>
-    Swal.fire({title: "Good job!", text: "{{ session()->get('success') }}", icon: "success"});
-</script>
+    <script>
+        Swal.fire({title: "Good job!", text: "{{ session()->get('success') }}", icon: "success"});
+    </script>
 @endif
 </body>
 </html>

@@ -1,5 +1,5 @@
 <fieldset class="scheduler-border mb-4">
-    <legend class="scheduler-border mb-3">1. Porteur du projet</legend>
+    <legend class="scheduler-border mb-3"> Porteur du projet</legend>
     <div class="row">
         <div class="col-md-4">
             <div class="mb-3">

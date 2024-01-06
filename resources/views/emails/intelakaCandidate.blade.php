@@ -4,7 +4,7 @@
 Nous vous remercions sincèrement pour votre candidature , svp consultez le lien suivant pour compléter votre demande
 
 
-<x-mail::button :url="route('candidate.tracking', ['id' => $memberData['id']])">
+<x-mail::button :url="route('candidate.tracking', ['member' => $memberData['id']])">
 Consulter
 </x-mail::button>
 

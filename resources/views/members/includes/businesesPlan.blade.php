@@ -1,5 +1,5 @@
 <fieldset class="scheduler-border mb-4">
-    <legend class="scheduler-border mb-3">1. Busineses Plan </legend>
+    <legend class="scheduler-border mb-3">Busineses Plan </legend>
     <div class="row">
         <div class="col-md-4">
             <x-custom-upload label="Devis ou factures" fileName="equipmentInvoice" table="business_plans" memberID="{{ $member->id }}" filePath="{{ $member->businessPlan->equipmentInvoice ?? '' }}"></x-custom-upload>
