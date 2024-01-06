@@ -45,6 +45,9 @@
                     <div class="mb-4">
                         <label for="candidateProjectDescription" class="form-label">Description du projet :</label>
                         <textarea name="description" class="form-control" rows="6">{{ old('description') ?? $member->projectDescription }}</textarea>
+                        @error('description')
+                          <div class="text-danger my-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary">Enregistrer</button>

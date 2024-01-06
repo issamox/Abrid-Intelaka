@@ -67,29 +67,22 @@ class MemeberController extends Controller
 
             $member =  Member::find($request->memberId);
 
-            switch ( $request->table ){
-                case 'members' :
-                     $member->cin = $docName;
-                     break;
-                case 'experiences' :
-                    $experience =  Experience::updateOrCreate( ['id' => $request->memberId ], [ $request->fileName  => $docName,]);
-                    $member->experience_id = $experience->id;
+            switch ($request->table) {
+                case 'members':
+                    $this->updateMemberCin($member, $docName);
                     break;
-                case 'legal_files' :
-                    $legalFile = LegalFile::updateOrCreate( ['id' => $request->memberId ], [ $request->fileName  => $docName,]);
-                    $member->legal_file_id = $legalFile->id;
+                case 'experiences':
+                    $this->updateExperience($request->memberId, $request->fileName, $docName, $member);
                     break;
-                case 'business_plans' :
-                    $businessPlan = BusinessPlan::updateOrCreate( ['id' => $request->memberId ], [ $request->fileName  => $docName,]);
-                    $member->business_plan_id = $businessPlan->id;
+                case 'legal_files':
+                    $this->updateLegalFile($request->memberId, $request->fileName, $docName, $member);
                     break;
-                case 'trainings' :
-                    Training::updateOrCreate( ['id' => $request->memberId ], [ $request->fileName  => $docName,
-                        'member_id' => $request->memberId,
-                        'user_id'   => Auth::id()
-                        ]);
+                case 'business_plans':
+                    $this->updateBusinessPlan($request->memberId, $request->fileName, $docName, $member);
                     break;
-
+                case 'trainings':
+                    $this->updateTraining($request->memberId, $request->fileName, $docName);
+                    break;
             }
             $member->save();
 
@@ -166,5 +159,43 @@ class MemeberController extends Controller
         } else {
             return response()->json(['error' => 'Unable to create the zip file.'], 500);
         }
+    }
+
+
+    // Helper method to update member cin
+    private function updateMemberCin(Member $member, $docName)
+    {
+        $member->cin = $docName;
+        $member->save();
+    }
+    // Helper method to update or create an experience
+    private function updateExperience($memberId, $fileName, $docName, Member $member)
+    {
+        $experience = Experience::updateOrCreate(['id' => $memberId], [$fileName => $docName]);
+        $member->experience_id = $experience->id;
+        $member->save();
+    }
+    // Helper method to update or create a legal file
+    private function updateLegalFile($memberId, $fileName, $docName, Member $member)
+    {
+        $legalFile = LegalFile::updateOrCreate(['id' => $memberId], [$fileName => $docName]);
+        $member->legal_file_id = $legalFile->id;
+        $member->save();
+    }
+   // Helper method to update or create a business plan
+    private function updateBusinessPlan($memberId, $fileName, $docName, Member $member)
+    {
+        $businessPlan = BusinessPlan::updateOrCreate(['id' => $memberId], [$fileName => $docName]);
+        $member->business_plan_id = $businessPlan->id;
+        $member->save();
+    }
+   // Helper method to update or create a training
+    private function updateTraining($memberId, $fileName, $docName)
+    {
+        Training::updateOrCreate(['id' => $memberId], [
+            $fileName  => $docName,
+            'member_id' => $memberId,
+            'user_id'   => Auth::id()
+        ]);
     }
 }

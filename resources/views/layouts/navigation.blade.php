@@ -9,9 +9,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('candidate.index') }}">List des candidats</a>
                 </li>
-            {{--    <li class="nav-item">
-                    <a class="nav-link" href="">Formation et Exprience</a>
-                </li>--}}
             </ul>
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">

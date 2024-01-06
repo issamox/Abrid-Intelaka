@@ -23,7 +23,7 @@ return new class extends Migration
             $table->dateTime('startActivity')->nullable();
             $table->string('creationProcedure')->nullable();
             $table->string('cin')->nullable();
-            $table->string('projectDescription')->nullable();
+            $table->text('projectDescription')->nullable();
 
             $table->foreignId('experience_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('legal_file_id')->nullable()->constrained()->cascadeOnDelete();

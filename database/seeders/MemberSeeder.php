@@ -25,7 +25,7 @@ class MemberSeeder extends Seeder
                 'legalStatus' => 'Création Hors MBGA',
                 'startActivity' => Carbon::create ('09/05/2016'),
                 'creationProcedure' => 'N/A',
-                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
+                'projectDescription' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             ],
             [
                 'province' => 'AGADIR IDA-OUTANANE',
@@ -37,7 +37,7 @@ class MemberSeeder extends Seeder
                 'legalStatus' => 'En cours',
                 'startActivity' => null,
                 'creationProcedure' => 'N/A',
-                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
+                'projectDescription' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             ],
             [
                 'province' => 'TIZNIT',
@@ -49,7 +49,7 @@ class MemberSeeder extends Seeder
                 'legalStatus' => 'En cours',
                 'startActivity' => null,
                 'creationProcedure' => 'N/A',
-                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
+                'projectDescription' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             ],
             [
                 'province' => 'TIZNIT',
@@ -61,7 +61,7 @@ class MemberSeeder extends Seeder
                 'legalStatus' => 'Création Hors MBGA',
                 'startActivity' => Carbon::create('01/01/2021'),
                 'creationProcedure' => 'N/A',
-                'projectDescription' => 'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page'
+                'projectDescription' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             ],
         ]);
     }
