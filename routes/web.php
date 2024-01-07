@@ -21,13 +21,19 @@ Route::group(['prefix' => 'candidate','as' => 'candidate.'],function (){
     Route::get('/sendMail/{id}', [MemeberController::class,'sendMail'])->name('mail');
     Route::post('/upload/', [MemeberController::class,'uploadFile'])->name('upload');
 
-    Route::get('/{member}/tracking', [MemeberController::class,'tracking'])->name('tracking');
-    Route::post('/{member}', [MemeberController::class,'update'])->name('update');
 
-    Route::get('/{member}/formation', [MemeberController::class,'formationForm'])->name('formationForm')->middleware('auth');
-    Route::get('/{member}/projectFilePdf', [MemeberController::class,'projectFilePdf'])->name('projectFilePdf')->middleware('auth');
-    Route::get('/{member}/candidateInfoPdf', [MemeberController::class,'candidateInfoPdf'])->name('candidateInfoPdf')->middleware('auth');
-    Route::get('/{member}/createZipFile', [MemeberController::class,'createZipFile'])->name('createZipFile')->middleware('auth');
+    Route::prefix('{member}')->group(function () {
+        Route::post('/', [MemeberController::class, 'update'])->name('update');
+        Route::get('/tracking', [MemeberController::class, 'tracking'])->name('tracking');
+
+        // Add middleware to multiple routes
+        Route::middleware('auth')->group(function () {
+            Route::get('/formation', [MemeberController::class, 'formationForm'])->name('formationForm');
+            Route::get('/projectFilePdf', [MemeberController::class, 'projectFilePdf'])->name('projectFilePdf');
+            Route::get('/candidateInfoPdf', [MemeberController::class, 'candidateInfoPdf'])->name('candidateInfoPdf');
+            Route::get('/createZipFile', [MemeberController::class, 'createZipFile'])->name('createZipFile');
+        });
+    });
 
 });
 

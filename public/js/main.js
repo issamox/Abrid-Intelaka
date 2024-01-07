@@ -14,15 +14,28 @@ $(document).ready(function () {
             data: formData,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             success: function (response) {
-                Swal.fire({title: "Good job!", text: response.message, icon: "success"});
-                _that.next().show();
-                _that.next().find('a').first().attr("href", response.path);
+                Swal.fire({
+                    title: "Good job!",
+                    text: response.message,
+                    icon: "success"
+                });
+
+                // Show the next element and set the href attribute
+                _that.next().show().find('a').first().attr("href", response.path);
+
+                // Show the 'checkedFile' element
                 _that.parent().find('.checkedFile').show();
+
+                // Disable the file input
                 _that.prop("disabled", true);
             },
             error: function (xhr, status, error) {
                 let jsonResponse = JSON.parse(xhr.responseText);
-                Swal.fire({title: "Error", text: jsonResponse.message, icon: "error"});
+                Swal.fire({
+                    title: "Error",
+                    text: jsonResponse.message,
+                    icon: "error"
+                });
             }
         });
     });

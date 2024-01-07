@@ -36,13 +36,21 @@ class MemeberController extends Controller
     public function sendMail($id){
         $member = Member::find($id);
 
-        if ( $member->email ){
-            $memberData = [ 'name' => $member->fullName, 'id'  => $member->id,];
-            Mail::to( $member->email )->send(new InteLakaCandidateEmail( $memberData ));
-            return redirect('/')->with('success','Email has been send successfully');
+        if ( $member && $member->email ){
+
+            try {
+                $memberData = ['name' => $member->fullName, 'id' => $member->id];
+                Mail::to($member->email)->send(new InteLakaCandidateEmail($memberData));
+
+                return redirect('/')->with('success', 'Email has been sent successfully');
+
+            } catch (\Exception $e) {
+                return redirect('/')->with('error', 'An unexpected error occurred while sending the email.');
+            }
         }
 
-        return redirect('/')->with('error','An unexpected error has occurred.');
+        return redirect('/')->with('error', 'Member not found or no email address available.');
+
 
     }
     public function tracking(Member $member){
@@ -57,6 +65,7 @@ class MemeberController extends Controller
             'file'     => 'required|mimes:pdf,jpg,jpeg,png|max:2048',
             'table'    => 'required',
             'memberId' => 'required',
+            'fileName' => 'required',
         ]);
 
         if ($request->hasFile('file')) {
@@ -67,23 +76,14 @@ class MemeberController extends Controller
 
             $member =  Member::find($request->memberId);
 
-            switch ($request->table) {
-                case 'members':
-                    $this->updateMemberCin($member, $docName);
-                    break;
-                case 'experiences':
-                    $this->updateExperience($request->memberId, $request->fileName, $docName, $member);
-                    break;
-                case 'legal_files':
-                    $this->updateLegalFile($request->memberId, $request->fileName, $docName, $member);
-                    break;
-                case 'business_plans':
-                    $this->updateBusinessPlan($request->memberId, $request->fileName, $docName, $member);
-                    break;
-                case 'trainings':
-                    $this->updateTraining($request->memberId, $request->fileName, $docName);
-                    break;
-            }
+            match ($request->table) {
+                'members'        => $this->updateMemberCin($member, $docName),
+                'experiences'    => $this->updateExperience( $member,$request->fileName, $docName),
+                'legal_files'    => $this->updateLegalFile($member,$request->fileName, $docName ),
+                'business_plans' => $this->updateBusinessPlan( $member, $request->fileName, $docName),
+                'trainings'      => $this->updateTraining($member,$request->fileName, $docName),
+                default          => null,
+            };
             $member->save();
 
             return response()->json([
@@ -166,35 +166,29 @@ class MemeberController extends Controller
     private function updateMemberCin(Member $member, $docName)
     {
         $member->cin = $docName;
-        $member->save();
     }
     // Helper method to update or create an experience
-    private function updateExperience($memberId, $fileName, $docName, Member $member)
+    private function updateExperience(Member $member,$fileName, $docName )
     {
-        $experience = Experience::updateOrCreate(['id' => $memberId], [$fileName => $docName]);
-        $member->experience_id = $experience->id;
-        $member->save();
+        $member->experience_id = Experience::updateOrCreate(['id' => $member->id], [$fileName => $docName])->id;
     }
     // Helper method to update or create a legal file
-    private function updateLegalFile($memberId, $fileName, $docName, Member $member)
+    private function updateLegalFile(Member $member,$fileName, $docName )
     {
-        $legalFile = LegalFile::updateOrCreate(['id' => $memberId], [$fileName => $docName]);
-        $member->legal_file_id = $legalFile->id;
-        $member->save();
+        $member->legal_file_id = LegalFile::updateOrCreate(['id' => $member->id], [$fileName => $docName])->id;
     }
    // Helper method to update or create a business plan
-    private function updateBusinessPlan($memberId, $fileName, $docName, Member $member)
+    private function updateBusinessPlan(Member $member,$fileName, $docName )
     {
-        $businessPlan = BusinessPlan::updateOrCreate(['id' => $memberId], [$fileName => $docName]);
-        $member->business_plan_id = $businessPlan->id;
-        $member->save();
+        $member->business_plan_id = BusinessPlan::updateOrCreate(['id' => $member->id], [$fileName => $docName])->id;
+
     }
    // Helper method to update or create a training
-    private function updateTraining($memberId, $fileName, $docName)
+    private function updateTraining(Member $member, $fileName, $docName)
     {
-        Training::updateOrCreate(['id' => $memberId], [
+        Training::updateOrCreate(['id' => $member->id], [
             $fileName  => $docName,
-            'member_id' => $memberId,
+            'member_id' => $member->id,
             'user_id'   => Auth::id()
         ]);
     }

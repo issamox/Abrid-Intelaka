@@ -1,5 +1,5 @@
 <fieldset class="scheduler-border mb-4">
-    <legend class="scheduler-border mb-3">3. Formation et Exprience </legend>
+    <legend class="scheduler-border mb-3">Formation et Exprience </legend>
     <div class="row">
         <div class="col-md-4">
             <x-custom-upload label="Certificat de formation" fileName="certificat" table="trainings" memberID="{{ $member->id }}" filePath="{{ $training->certificat ?? '' }}"></x-custom-upload>
